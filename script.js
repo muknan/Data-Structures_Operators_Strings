@@ -31,3 +31,40 @@ const restaurant = {
     },
   },
 };
+
+const arr = [2, 5, 7];
+const a = arr[0];
+const b = arr[1];
+const c = arr[2];
+
+//  Destructuring Arrays
+const [x, y, z] = arr;
+console.log(x, y, z);
+
+let [main, , secondary] = restaurant.categories;
+console.log(main, secondary);
+
+// Switching variables
+// let temp = main;
+// main = secondary;
+// secondary = temp;
+// console.log(main, secondary);
+
+[main, secondary] = [secondary, main];
+console.log(main, secondary);
+
+// Receive 2 return values from a function
+const [starterItems, mainItems] = restaurant.order(2, 0);
+console.log(starterItems, mainItems);
+
+// Nested destructuring
+const nested = [2, 5, [7, 9]];
+// const [i, , j] = nested;
+
+const [i, , [n, m]] = nested;
+
+console.log(i, n, m);
+
+// Default values
+const [p = 1, q = 1, r = 1] = [8, 9];
+console.log(p, q, r);
