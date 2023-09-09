@@ -6,7 +6,7 @@ const flights =
 
 // Data needed for first part of the section
 const restaurant = {
-  name: 'Classico Italiano',
+  rName: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
@@ -30,14 +30,73 @@ const restaurant = {
       close: 24,
     },
   },
+
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received - Starter Dish: ${this.starterMenu[starterIndex]} & Main Dish: ${this.mainMenu[mainIndex]} and will be delivered to ${address} by ${time}`
+    );
+  },
 };
 
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Jitar Nagar',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+restaurant.orderDelivery({
+  address: 'Jitar Nagar',
+  starterIndex: 3,
+});
+
+const { rName, openingHours, categories } = restaurant;
+console.log(rName, openingHours, categories);
+
+// Renaming destructured object
+const {
+  rName: restaurantName,
+  openingHours: hours,
+  categories: type,
+} = restaurant;
+console.log(restaurantName, hours, type);
+
+// Default values for new and renamed property in a object
+const {
+  menu = ['Pizza', 'Butter Chicken', 'Fish & Chips'],
+  starterMenu: starters = ['Buffalo Wings', 'Poutine', 'Soup'],
+} = restaurant;
+console.log(menu, starters);
+
+// Mutating variables
+let a = 11;
+let b = 99;
+const obj = { a: 23, b: 7, c: 14 };
+({ a, b } = obj);
+console.log(a, b);
+
+const {
+  thu: { open: thuO, close: thuC },
+  fri: { open: o, close: c },
+  sat,
+} = openingHours;
+
+console.log(o, c);
+console.log(thuO, thuC);
+
+/*
+//////////////////////////////////
+//  Destructuring Arrays
 const arr = [2, 5, 7];
 const a = arr[0];
 const b = arr[1];
 const c = arr[2];
 
-//  Destructuring Arrays
 const [x, y, z] = arr;
 console.log(x, y, z);
 
@@ -68,3 +127,4 @@ console.log(i, n, m);
 // Default values
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
+*/
