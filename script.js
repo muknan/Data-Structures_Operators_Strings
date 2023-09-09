@@ -47,6 +47,11 @@ const restaurant = {
       `Your pasta with customized ingredients: ${ing1}, ${ing2} and ${ing3} is being prepared by the restaurant and will be soon on your way!`
     );
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
 // Spread operator example
@@ -66,6 +71,40 @@ const restaurantCopy = { ...newRestraunt };
 restaurantCopy.founder = 'Phil';
 console.log(restaurantCopy.founder);
 console.log(newRestraunt.founder);
+
+// SPREAD, because its declared on right side of assignment (=) operator
+const arr = [1, 2, ...[3, 4]];
+
+// REST, because on left side of (=)
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(others);
+
+const [pizza, , risotto, ...otherItems] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherItems);
+
+// Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+// Funcions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(2, 3);
+add(2, 3, 5, 7);
+
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderPizza('Mushrooms', 'Onions', 'Jalapeno', 'Spinach');
 
 /*
 restaurant.orderDelivery({
@@ -151,7 +190,7 @@ console.log(i, n, m);
 // Default values
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
-*/
+
 
 const arr = [2, 5, 7];
 const badArr = [9, 11, arr[0], arr[1], arr[2]];
@@ -179,3 +218,4 @@ console.log(menu);
 const str = 'Mukul';
 const letters = [...str, '', 'N.'];
 console.log(...letters);
+*/
