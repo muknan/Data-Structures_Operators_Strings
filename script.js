@@ -41,8 +41,33 @@ const restaurant = {
       `Order received - Starter Dish: ${this.starterMenu[starterIndex]} & Main Dish: ${this.mainMenu[mainIndex]} and will be delivered to ${address} by ${time}`
     );
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Your pasta with customized ingredients: ${ing1}, ${ing2} and ${ing3} is being prepared by the restaurant and will be soon on your way!`
+    );
+  },
 };
 
+// Spread operator example
+const ingredients = [
+  // prompt("Let's make paste! Please enter ingredient 1?"),
+  // prompt('Please enter ingredient 2?'),
+  // prompt('Please enter ingredient 3?'),
+];
+
+restaurant.orderPasta(...ingredients);
+
+// Objects
+const newRestraunt = { founded: 1998, ...restaurant, founder: 'Ted' };
+console.log(newRestraunt);
+
+const restaurantCopy = { ...newRestraunt };
+restaurantCopy.founder = 'Phil';
+console.log(restaurantCopy.founder);
+console.log(newRestraunt.founder);
+
+/*
 restaurant.orderDelivery({
   time: '22:30',
   address: 'Jitar Nagar',
@@ -89,7 +114,6 @@ const {
 console.log(o, c);
 console.log(thuO, thuC);
 
-/*
 //////////////////////////////////
 //  Destructuring Arrays
 const arr = [2, 5, 7];
@@ -128,3 +152,30 @@ console.log(i, n, m);
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
 */
+
+const arr = [2, 5, 7];
+const badArr = [9, 11, arr[0], arr[1], arr[2]];
+console.log(badArr);
+
+const newArr = [9, 11, ...arr];
+console.log(newArr);
+
+console.log(...newArr);
+console.log(9, 11, 2, 5, 7);
+
+const newMainMenu = [...restaurant.mainMenu, 'Butter Chicken'];
+console.log(newMainMenu);
+
+// Copy array
+const mainMenyCopy = [...restaurant.mainMenu];
+
+// Merge arrays
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+// Spread operator works on iterables
+// Iterables: arrays, strings, maps, sets but NOT objects
+
+const str = 'Mukul';
+const letters = [...str, '', 'N.'];
+console.log(...letters);
