@@ -54,6 +54,39 @@ const restaurant = {
   },
 };
 
+restaurant.numGuests = 0;
+console.log(restaurant.numGuests ?? 10);
+
+/*
+//  Short circuiting with ||
+console.log('---------- OR ----------');
+console.log(3 || 'Mukul ');
+console.log('' || 'Mukul ');
+console.log(true || 0);
+console.log(undefined || null);
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 0;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+// returns the first truthy or last falsy value if there is no true value in the circuit
+console.log(restaurant.numGuests || 10);
+console.log(restaurant.numGuests ?? 10);
+
+// with &&
+console.log('---------- AND ----------');
+// returns the first falsy or last truthy value if there is no false value in the circuit
+console.log(0 && 'Mukul');
+console.log(7 && 'Mukul');
+console.log('Hello' && 23 && null && 'Nanda');
+
+// Example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('Grilled Mushrooms', 'Onions');
+}
+restaurant.orderPizza && restaurant.orderPizza('Grilled Mushrooms', 'Onions');
+
 // Spread operator example
 const ingredients = [
   // prompt("Let's make paste! Please enter ingredient 1?"),
@@ -106,7 +139,6 @@ add(...x);
 
 restaurant.orderPizza('Mushrooms', 'Onions', 'Jalapeno', 'Spinach');
 
-/*
 restaurant.orderDelivery({
   time: '22:30',
   address: 'Jitar Nagar',
