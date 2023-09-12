@@ -74,6 +74,97 @@ const restaurant = {
   },
 };
 
+// STRINGS manipulation
+// JS converts String into an object behind the scenes such as with: new String('Test String')
+// This boxing provides us access to all the methods
+// Applying method on string or string object would always return a string
+const airline = 'Emirates Airlines UAE';
+const plane = 'A26';
+
+console.log(plane[0]);
+
+console.log(airline.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Airlines'));
+
+console.log(airline.slice(9));
+console.log(airline.slice(9, 12));
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-3)); //returns last 3 letter of string
+console.log(airline.slice(1, -1)); // returns string without first and last letter
+
+const checkMiddleSeat = function (seat) {
+  // const s = seat.slice(-1); // Takes out last character from a string
+  // BOTH if works
+  // if (s === 'B' || s === 'E') {
+  if (seat.indexOf('B') !== -1 || seat.indexOf('E') !== -1) {
+    console.log('You got lucky! 😀');
+  } else {
+    console.log('You got the middle seat. 😅');
+  }
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+// STRINGS METHODS
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+// Fix capitalization in passengers name
+const passenger = 'mUkul';
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+// Comparing emails
+const email = 'muk.msi@gmail.com';
+const loginEmail = ' mUk.msi@gmail.Com  \n';
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+const finalEmail = loginEmail.toLowerCase().trim();
+console.log(finalEmail === email);
+
+// replacing
+const priceUSD = '199.50$';
+const priceGB = priceUSD.replace('$', '£').replace('.', ',');
+console.log(priceGB);
+
+const announcement =
+  'All passengers must come to boarding door. Plane is going to depart soon for boarding door 5';
+// console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replace(/door/g, 'gate')); // to replace all occurences of door
+
+// Booleans
+const planeStr = 'Airbus A320neo';
+console.log(planeStr.includes('neo')); // true
+console.log(planeStr.includes('old')); // false
+console.log(planeStr.startsWith('Airb')); // true
+
+if (planeStr.startsWith('Airbus') && planeStr.endsWith('neo')) {
+  console.log('Part of new airbus family.');
+}
+
+// Practice exercise
+const checkBaggage = function (item) {
+  const itemLower = item.toLowerCase();
+  const check =
+    itemLower.includes('gun') || itemLower.includes('knife')
+      ? console.log('Items not allowed, proceed to security area!')
+      : console.log('Baggage checked in!');
+  return check;
+};
+
+checkBaggage('I have a Laptop, some food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a Gun and knife for protection');
 /*
 // MAPS
 const rest = new Map();
@@ -572,7 +663,6 @@ for (const x of a) {
 }
 
 console.log(score);
-*/
 
 //////////////////////////////////////////////////////
 //////////////////// CHANLLENGE 3 ////////////////////
@@ -628,3 +718,4 @@ for (const [key, value] of gameEvents) {
     ? console.log(`[FIRST HALF] ${key}: ${value}`)
     : console.log(`[SECOND HALF] ${key}: ${value}`);
 }
+*/
