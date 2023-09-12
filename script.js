@@ -4,6 +4,19 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+let a;
+let s = [];
+for (const flight of flights.split('+')) {
+  const [type, from, to, time] = flight.split(';');
+  const output = `${type.startsWith('_Del') ? '⚠️' : ''}${type.replaceAll(
+    '_',
+    ' '
+  )} from ${from.replace(/[0-9]/g, '').toUpperCase()} to ${to
+    .replace(/[0-9]/g, '')
+    .toUpperCase()} (${time.replace(':', 'h')})`.padStart(50);
+  console.log(output);
+}
+
 const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 const openingHours = {
@@ -74,10 +87,15 @@ const restaurant = {
   },
 };
 
+/*
 // STRINGS manipulation
 // JS converts String into an object behind the scenes such as with: new String('Test String')
 // This boxing provides us access to all the methods
 // Applying method on string or string object would always return a string
+
+// indexOf
+// lastIndexOf
+// slice
 const airline = 'Emirates Airlines UAE';
 const plane = 'A26';
 
@@ -113,6 +131,13 @@ checkMiddleSeat('23C');
 checkMiddleSeat('3E');
 
 // STRINGS METHODS
+// - toLowerCase
+// - toUpperCase
+// - trim
+// - replace
+// - includes
+// - startsWith
+// - endsWith
 console.log(airline.toLowerCase());
 console.log(airline.toUpperCase());
 
@@ -165,7 +190,53 @@ const checkBaggage = function (item) {
 checkBaggage('I have a Laptop, some food and a pocket Knife');
 checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a Gun and knife for protection');
-/*
+
+// MORE STRINGS METHODS - Split and Join
+console.log(...'a+very+nice+string'.split('+'));
+console.log(...'Mukul Nanda'.split(' '));
+const [firstName, lastName] = 'Mukul Nanda'.split(' '); //Destructure
+
+const fullName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(fullName);
+
+const pName = 'jessica ann smith jones';
+let fn = [];
+const capital = function (name) {
+  const a = name.split(' ');
+  for (const c of a) {
+    console.log(c);
+    // fn.push([c[0].toUpperCase() + c.slice(1)]);
+    fn.push(c.replace(c[0], c[0].toUpperCase()));
+  }
+  console.log(fn.join(' '));
+  // console.log(...fn);
+};
+capital(pName);
+
+// Padding
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+').padEnd(40, '-'));
+
+// Example
+const maskCard = function (num) {
+  const card = num + '';
+  const lastDigits = card.slice(-4);
+  console.log(lastDigits.padStart(card.length, '*'));
+};
+
+maskCard(1234919182821717);
+maskCard('5201928172616225');
+
+// Repeat
+const weather = 'Bad weather... All departures delayed...';
+console.log(weather.repeat(4));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes inline ${'✈️'.repeat(n)}`);
+};
+
+planesInLine(5);
+
 // MAPS
 const rest = new Map();
 rest.set('name', 'Hira Sweets');
@@ -718,4 +789,35 @@ for (const [key, value] of gameEvents) {
     ? console.log(`[FIRST HALF] ${key}: ${value}`)
     : console.log(`[SECOND HALF] ${key}: ${value}`);
 }
+
+
+//////////////////////////////////////////////////////
+//////////////////// CHANLLENGE 4 ////////////////////
+//////////////////////////////////////////////////////
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+let text;
+
+document.querySelector('button').addEventListener('click', function () {
+  text = document.querySelector('textarea').value;
+  convertCamel(text);
+});
+
+// 1.
+// let counter = 1;
+const convertCamel = function (t) {
+  const str = (t + '').split('\n');
+  for (const [i, e] of str.entries()) {
+    // let lower = e.trim().toLowerCase();
+    // let i = lower.indexOf('_') + 1;
+    // let camel = lower.slice(i).replace(lower[i], lower[i].toUpperCase());
+    // console.log(camel);
+    let lower = e.trim().toLowerCase();
+    let [a, b] = lower.split('_');
+    b = b.replace(b[0], b[0].toUpperCase());
+    console.log([a, b].join('').padEnd(20, ' ') + '✅'.repeat(i + 1));
+    // counter++;
+  }
+};
 */
