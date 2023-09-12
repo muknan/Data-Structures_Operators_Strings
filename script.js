@@ -75,6 +75,115 @@ const restaurant = {
 };
 
 /*
+// MAPS
+const rest = new Map();
+rest.set('name', 'Hira Sweets');
+rest.set(1, 'CP');
+rest.set(2, 'LN');
+rest
+  .set('categories', ['Indian', 'American', 'Chinese'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open :D')
+  .set(false, 'We are closed :(');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close'))); //true O/P: We are open :D
+
+console.log(rest.has(1));
+rest.delete(1);
+console.log(rest);
+console.log(rest.size);
+// rest.clear();
+
+// rest.set([1, 2], 'Test');
+// console.log(rest.get([1, 2])); // RETURNS undefined
+// Fix is to make a new array variable and pass that
+const arr = [1, 2];
+rest.set(arr, 'Test');
+console.log(rest.get(arr));
+
+rest.set(document.querySelector('h1'), 'Heading');
+
+// QUIZ app
+const question = new Map([
+  ['question', 'What is the best programming language?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+//Convert object to map
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key !== 'number') continue;
+  else console.log(`${key}: ${value}`);
+}
+
+const answer = Number(prompt('Your answer'));
+console.log(question.get(question.get('correct') === answer));
+
+// Convert map to array
+console.log([...question]);
+
+// SETS
+const ordersSet = new Set([
+  'Pizza',
+  'Pasta',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+console.log(ordersSet.has('Pizza'));
+ordersSet.delete('Pasta');
+console.log(ordersSet.size);
+
+console.log(ordersSet);
+
+for (const items of ordersSet) {
+  console.log(items);
+}
+
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+console.log([...new Set(staff)]);
+
+//
+
+
+// Property NAMES
+const properties = Object.keys(openingHours);
+let openStr = `We are open ${properties.length} days of the week: `;
+
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// Property VALUES
+const values = Object.values(openingHours);
+console.log(values);
+
+// Entire object - NAMES + VALUES
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key}, we open at ${open} and close at ${close}.`);
+}
+
 // Optional chaining
 // Old way - if to check if a property exists, could nest alot
 if (restaurant.openingHours && restaurant.openingHours.open) {
@@ -379,4 +488,143 @@ const { odds } = game;
 
 odds.team1 > odds.team2 && console.log('Team 2 wins');
 odds.team1 < odds.team2 && console.log('Team 1 wins');
+
+
+//////////////////////////////////////////////////////
+//////////////////// CHANLLENGE 2 ////////////////////
+//////////////////////////////////////////////////////
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// 1.
+for (const [key, value] of game.scored.entries()) {
+  console.log(`Goal ${key + 1}: ${value}`);
+}
+
+// 2.
+const gameEntries = Object.entries(game.odds);
+let sum = 0;
+for (const [key, value] of gameEntries) {
+  sum += value;
+}
+console.log(Number(parseFloat(sum / gameEntries.length).toFixed(2)));
+
+// 3.
+for (const [key, value] of gameEntries) {
+  if (key === 'x') {
+    console.log(`Odds of draw: ${value}`);
+  } else {
+    console.log(`Odds of victory for ${game[key]}: ${value} `);
+  }
+}
+
+// 4.
+const a = game.scored;
+// console.log(a);
+let score = {};
+
+for (const x of a) {
+  score[x] = 0;
+}
+
+for (const x of a) {
+  if (Object.keys(score).includes(x)) {
+    score[x] += 1;
+  }
+}
+
+console.log(score);
 */
+
+//////////////////////////////////////////////////////
+//////////////////// CHANLLENGE 3 ////////////////////
+//////////////////////////////////////////////////////
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+// 1.
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+// 2.
+// gameEvents.delete(64);
+console.log(gameEvents);
+
+// 3.
+gameEvents.delete(92);
+console.log(gameEvents);
+for (const e of events) {
+  let x = 0;
+  let total = 0;
+  let y = 0;
+  let count = 0;
+  for (const [key, value] of gameEvents) {
+    if (value === e) {
+      let temp = key;
+      x = temp - y;
+      // console.log(value);
+      // console.log(x);
+      y = temp;
+      total += x;
+      count++;
+      // console.log(total);
+    }
+  }
+  console.log(`${e} happened, on average, every ${total / count} minutes`);
+}
+
+// 4.
+for (const [key, value] of gameEvents) {
+  key <= 45
+    ? console.log(`[FIRST HALF] ${key}: ${value}`)
+    : console.log(`[SECOND HALF] ${key}: ${value}`);
+}
