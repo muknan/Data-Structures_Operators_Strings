@@ -49,11 +49,28 @@ test('string');
 
 poll.displayResults.call(pollOpt);
 poll.displayResults.call(pollOpt, 'string');
+*/
+
+/////////////////////////////////////////
+// ----------- CHALLENGE 2 ----------- //
+/////////////////////////////////////////
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  document.querySelector('body').addEventListener('mousedown', function () {
+    header.classList.add('hcolor');
+  });
+  document.querySelector('body').addEventListener('mouseup', function () {
+    header.classList.remove('hcolor');
+  });
+})();
 
 /////////////////////////////////////////
 // ---------- CHALLENGE END ---------- //
 /////////////////////////////////////////
 
+/*
 // Default parameters
 
 const book = [];
@@ -223,4 +240,97 @@ const addVATFn = function (rate) {
 const addVAT2 = addVATFn(0.23);
 addVAT2(100);
 addVAT2(500);
+
+const originalArray = [9, 5, 1, 3, 2, 7, 4, 6, 8];
+const arr = [...new Set(originalArray)];
+let min = arr[0];
+let max = arr[0];
+let flag = 1;
+
+for (let i = 0; i < arr.length; i++) {
+  if (min > arr[i]) {
+    min = arr[i];
+  }
+}
+
+for (let i = 0; i < arr.length; i++) {
+  if (max < arr[i]) {
+    max = arr[i];
+  }
+}
+
+while (min <= max) {
+  if (!arr.includes(min)) {
+    flag = 0;
+  }
+  min++;
+}
+
+flag === 0
+  ? console.log('Not a consecutive array')
+  : console.log('Consecutive array');
+
+// Immediately invoked function expressions
+const runOnce = function () {
+  console.log('This will never run again');
+};
+runOnce();
+
+(function () {
+  console.log('This will never run again');
+})();
+
+(() => console.log('This will also never run again'))();
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking(); //essential to get access to variable environment of EC in which it was created
+booker(); // VE attached to the function, exactly at the time and place function was created
+booker();
+booker();
+
+console.dir(booker);
+
+// Closure - Example 1
+let f;
+
+const g = function () {
+  const a = 10;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+
+// Re-assigning f function - closure changes to b
+h();
+f();
+
+// Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+  setTimeout(function () {
+    console.log(`We are boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup}`);
+  }, wait * 1000);
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+boardPassengers(180, 3);
 */
