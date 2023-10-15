@@ -212,4 +212,180 @@ var floodFill = function (image, sr, sc, color) {
   }
   return rec(image, sr, sc);
 };
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const lowestCommonAncestor = function (root, p, q) {
+  let result = null;
+
+  function dfs(node) {
+    if (node === null) return false;
+
+    let left = dfs(node.left);
+    let right = dfs(node.right);
+
+    let cur = node === p || node === q;
+
+    if (left + right + cur >= 2) result = node;
+
+    return left || right || cur;
+  }
+  dfs(root);
+  return result;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const isBalanced = function (root) {
+  if (root === null) return true;
+  return height(root) !== -1;
+};
+
+function height(node) {
+  if (node === null) return 0;
+  let left = height(node.left);
+  let right = height(node.right);
+  let bf = Math.abs(left - right);
+
+  if (bf > 1 || left === -1 || right === -1) return -1;
+  return 1 + Math.max(left, right);
+}
+
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const hasCycle = function (head) {
+  let fast = head;
+  let slow = head;
+
+  while (fast && fast.next) {
+    fast = fast.next.next;
+    slow = slow.next;
+
+    if (fast === slow) return true;
+  }
+  return false;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+class MyQueue {
+  constructor() {
+    this.pushStack = [];
+    this.popStack = [];
+  }
+
+  push(val) {
+    this.pushStack.push(val);
+  }
+
+  pop() {
+    if (!this.popStack.length) {
+      while (this.pushStack.length) {
+        this.popStack.push(this.pushStack.pop());
+      }
+    }
+    return this.popStack.pop();
+  }
+
+  peek() {
+    if (!this.popStack.length) {
+      while (this.pushStack.length) {
+        this.popStack.push(this.pushStack.pop());
+      }
+    }
+    return this.popStack[this.popStack.length - 1];
+  }
+
+  empty() {
+    return !this.pushStack.length && !this.popStack.length;
+  }
+}
+
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+var solution = function (isBadVersion) {
+  return function (n) {
+    let start = 0;
+    let end = n;
+
+    while (start < end) {
+      let mid = Math.floor((start + end) / 2);
+      if (isBadVersion(mid)) {
+        end = mid;
+      } else {
+        start = mid + 1;
+      }
+    }
+    return end;
+  };
+};
+
+
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const canConstruct = function (n, m) {
+  const map = {};
+  for (let i of m) {
+    map[i] = ++map[i] || 1;
+  }
+  for (let i of n) {
+    if (!map[i]) {
+      return false;
+    }
+    map[i]--;
+  }
+  return true;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //  
+//////////////////////////////////////////////////
+
+const climbStairs = function (n) {
+  let dp = [1, 2];
+
+  for (let i = 2; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+  return dp[n - 1];
+};
+
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+var longestPalindrome = function(s) {
+  const map = new Map();
+  let len = 0;
+
+  for (let i of s){
+      let n = 0;
+      if(map.has(i)){
+          n = map.get(i);
+          if(n%2) len+=2;
+      }
+      map.set(i,n+1);
+  }  
+  return s.length>len?len+1:len; 
+};
 */
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
