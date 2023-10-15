@@ -384,6 +384,159 @@ var longestPalindrome = function(s) {
   }  
   return s.length>len?len+1:len; 
 };
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const reverseList = function (head) {
+  let prev = null;
+  let n;
+  let cur = head;
+
+  while (cur !== null) {
+    next = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = next;
+  }
+  return prev;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const majorityElement = function (nums) {
+  const n = nums.length - 1;
+  const map = {};
+
+  for (const i of nums) {
+    map[i] = ++map[i] || 1;
+  }
+
+  for (const [key, value] of Object.entries(map)) {
+    if (map[key] > n / 2) {
+      return key;
+    }
+  }
+};
+majorityElement([2, 2, 1, 1, 1, 2, 2]);
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const addBinary = function (a, b) {
+  let carry = 0;
+  let sum;
+  let l1 = a.length - 1;
+  let l2 = b.length - 1;
+  let res = '';
+
+  while (l1 >= 0 || l2 >= 0) {
+    sum = (Number(a[l1]) || 0) + (Number(b[l2]) || 0) + carry;
+    res = (sum % 2) + res;
+    carry = sum > 1 ? 1 : 0;
+    l1--;
+    l2--;
+  }
+  if (carry) res = '1' + res;
+  return res;
+};
+console.log(addBinary('1010', '1011'));
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const diameterOfBinaryTree = function (root) {
+  if (!root) return 0;
+  let max = 0;
+
+  function dfs(node) {
+    if (!node) return 0;
+
+    let left = dfs(node.left);
+    let right = dfs(node.right);
+
+    max = Math.max(left + right, max);
+
+    return Math.max(left, right) + 1;
+  }
+  dfs(root);
+  return max;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const middleNode = function (head) {
+  let s = head;
+  let f = head;
+
+  while (f && f.next) {
+    s = s.next;
+    f = f.next.next;
+  }
+  return s;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+var maxDepth = function (root) {
+  if (!root) return 0;
+  return 1 + Math.max(maxDepth(root.right), maxDepth(root.left));
+};
+
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const containsDuplicate = function (nums) {
+  // Using Sets
+  let uni = [...new Set(nums)];
+  return !(uni.length === nums.length);
+
+  //Using hashmaps
+  const map = {};
+  for (const i of nums) {
+    map[i] = ++map[i] || 1;
+    if (map[i] > 1) return true;
+  }
+  return false;
+};
+console.log(containsDuplicate([1, 1, 2, 3, 4]));
+
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const canAttend = function (i) {
+  if (i.length < 2) return true;
+  i.sort((a, b) => a[0] - b[0]);
+
+  // 2nd element (end time) of first tuple of sorted array
+  let end = i[0][1];
+
+  for (let x = 1; x < i.length; x++) {
+    if (end > i[x][0]) return false;
+    if (end < i[x][1]) end = i[x][1];
+  }
+  return true;
+};
+console.log(
+  canAttend([
+    [0, 30],
+    [5, 10],
+    [15, 20],
+  ])
+);
 */
 
 //////////////////////////////////////////////////
