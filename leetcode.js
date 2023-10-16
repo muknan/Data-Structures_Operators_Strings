@@ -537,6 +537,72 @@ console.log(
     [15, 20],
   ])
 );
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const romanToInt = function (s) {
+  const symbols = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+  let total = 0;
+  for (let i = 0; i < s.length; i++) {
+    let curr = s[i];
+    let next = s[i + 1];
+
+    if (symbols[curr] < symbols[next]) total -= symbols[curr];
+    else total += symbols[curr];
+  }
+  return total;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const backspaceCompare = function (s, t) {
+  const back = function (str) {
+    const res = [];
+    for (const i of str) {
+      if (i === '#') {
+        res.pop();
+      } else {
+        res.push(i);
+      }
+    }
+    return res.join();
+  };
+  return back(s) === back(t);
+};
+console.log(backspaceCompare('xywrrmp', 'xywrrmu#p'));
+
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const countBits = function (n) {
+  let res = [];
+  for (let i = 0; i <= n; i++)
+    res.push(Number(i).toString(2).replace(/0/g, '').length);
+  return res;
+};
+countBits(5);
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const hammingWeight = function (n) {
+  let count = 0;
+
+  while (n != 0) {
+    let one = n & 1;
+    if (one === 1) count++;
+    n = n >>> 1;
+  }
+  return count;
+};
+
 */
 
 //////////////////////////////////////////////////
