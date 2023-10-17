@@ -592,6 +592,21 @@ countBits(5);
 // --------------- Next problem --------------- //
 //////////////////////////////////////////////////
 
+const isSameTree = function(p, q) {
+
+    if(p===null&&q===null) return true;
+    if(p===null||q===null) return false;
+
+    if(p.val === q.val){
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+    }
+    return false;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
 const hammingWeight = function (n) {
   let count = 0;
 
@@ -603,8 +618,146 @@ const hammingWeight = function (n) {
   return count;
 };
 
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const longestCommonPrefix = function (strs) {
+  if (strs.length === 0) return '';
+
+  let pr = strs[0];
+
+  for (let i = 1; i < strs.length; i++) {
+    while (strs[i].indexOf(pr) != 0) {
+      pr = pr.substring(0, pr.length - 1);
+    }
+  }
+  return pr;
+};
+longestCommonPrefix(['flower', 'flow', 'flight']);
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const singleNumber = function (nums) {
+  let res = 0;
+  for (const i of nums) {
+    res ^= i;
+  }
+  return res;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const rev = function (head) {
+  let cur = head;
+  let prev = null;
+  let next;
+  while (cur) {
+    next = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = next;
+  }
+  return prev;
+};
+
+var isPalindrome = function (head) {
+  let sp = head;
+  let s = head;
+  let f = head;
+  let len = 0;
+
+  while (f && f.next) {
+    f = f.next.next;
+    s = s.next;
+    len++;
+  }
+
+  let mid = rev(s);
+
+  while (len) {
+    len--;
+    if (mid.val !== sp.val) return false;
+    mid = mid.next;
+    sp = sp.next;
+  }
+  return true;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const moveZeroes = function (nums) {
+  let n = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      nums[n] = nums[i];
+      n++;
+    }
+  }
+  for (let i = n; i < nums.length; i++) {
+    nums[i] = 0;
+  }
+  return nums;
+};
+moveZeroes([0, 1, 0, 3, 12]);
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+var isSymmetric = function (root) {
+  const dfs = (l, r) => {
+    if (!l && !r) return true;
+    if (!l || !r || l.val !== r.val) return false;
+
+    return dfs(l.left, r.right) && dfs(l.right, r.left);
+  };
+  return dfs(root.left, root.right);
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const missingNumber = function (nums) {
+  // let map = {};
+  // const n = nums.length;
+  // for (const i of nums) {
+  //   map[i] = ++map[i] || 1;
+  // }
+  // for (let i = 0; i <= n; i++) {
+  //   if (!map[i]) return i;
+  // }
+  // return -1;
+
+  let n = nums.length;
+  let nSum = (n * (n + 1)) / 2; // Sum on n digits from 0 to n equation
+
+  const sum = nums.reduce((a, s) => (s += a), 0);
+
+  return nSum - sum;
+};
+console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]));
 */
 
 //////////////////////////////////////////////////
 // --------------- Next problem --------------- //
 //////////////////////////////////////////////////
+
+const isPalindrome = function (x) {
+  let rev = 0;
+  if (x < 0) return false;
+
+  for (let i = x; i >= 1; i = Math.floor(i / 10)) {
+    rev = rev * 10 + (i % 10);
+  }
+
+  return rev === x;
+};
+isPalindrome(123);
