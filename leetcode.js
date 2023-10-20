@@ -760,7 +760,6 @@ const isPalindrome = function (x) {
   return rev === x;
 };
 isPalindrome(123);
-*/
 
 //////////////////////////////////////////////////
 // --------------- Next problem --------------- //
@@ -885,6 +884,88 @@ const insert = function (intervals, newInterval) {
   return [...left, [start, end], ...right];
 };
 // Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+*/
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const updateMatrix = function (mat) {
+  let m = mat.length,
+    n = mat[0].length;
+  let dp = new Array(m).fill(-1).map(() => new Array(n).fill(-1));
+  let queue = [];
+
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (mat[i][j] === 0) {
+        dp[i][j] = 0;
+        queue.push([i, j]);
+      }
+    }
+  }
+
+  let dir = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
+  while (queue.length) {
+    let [i, j] = queue.shift();
+    for (let d of dir) {
+      x = i + d[0];
+      y = j + d[1];
+      if (x < 0 || x >= m || y < 0 || y >= n || dp[x][y] !== -1) continue;
+      dp[x][y] = 1 + dp[i][j];
+      queue.push([x, y]);
+    }
+  }
+  return dp;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const kClosest = function (points, k) {
+  let dist = (x, y) => x * x + y * y;
+
+  let heap = new MaxPriorityQueue();
+
+  for (let [x, y] of points) {
+    let d = dist(x, y);
+    heap.enqueue([x, y], d);
+    if (heap.size() > k) heap.dequeue();
+  }
+
+  let res = [];
+  while (heap.size()) {
+    res.push(heap.dequeue().element);
+  }
+
+  return res;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const longestSubstring = function (str) {
+  let longest = 0;
+  const seen = {};
+  let start = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (seen[char]) {
+      start = Math.max(start, seen[char]);
+    }
+    longest = Math.max(longest, i - start + 1);
+    seen[char] = i + 1;
+  }
+  return longest;
+};
 
 //////////////////////////////////////////////////
 // --------------- Next problem --------------- //
