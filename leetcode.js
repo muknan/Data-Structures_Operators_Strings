@@ -744,7 +744,6 @@ const missingNumber = function (nums) {
   return nSum - sum;
 };
 console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]));
-*/
 
 //////////////////////////////////////////////////
 // --------------- Next problem --------------- //
@@ -761,3 +760,132 @@ const isPalindrome = function (x) {
   return rev === x;
 };
 isPalindrome(123);
+*/
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const sortedArrayToBST = function (nums, left = 0, right = nums.length - 1) {
+  if (left > right) return null;
+
+  let mid = Math.floor((left + right) / 2);
+  let root = new TreeNode(nums[mid]);
+
+  root.left = sortedArrayToBST(nums, left, mid - 1);
+  root.right = sortedArrayToBST(nums, mid + 1, right);
+
+  return root;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const reverseBits = function (n) {
+  let res = 0;
+
+  for (let i = 0; i < 32; i++) {
+    let lastBit = n & 1;
+    let revBit = lastBit << (31 - i);
+    res = res | revBit;
+    n = n >>> 1;
+  }
+  return res >>> 0;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+var isSubtree = function (root, subRoot) {
+  function isSame(root1, root2) {
+    if (!root1 && !root2) return true;
+
+    if (!root1 || !root2 || root1.val !== root2.val) return false;
+
+    return isSame(root1.left, root2.left) && isSame(root1.right, root2.right);
+  }
+
+  function dfs(n) {
+    if (!n) return false;
+
+    if (isSame(n, subRoot)) return true;
+
+    return dfs(n.left) || dfs(n.right);
+  }
+  return dfs(root);
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const sortedSquares = function (nums) {
+  const res = new Array(nums.length).fill(0);
+
+  let l = 0;
+  let r = nums.length - 1;
+  let rIdx = nums.length - 1;
+
+  while (l <= r) {
+    let leftVal = nums[l] ** 2;
+    let rightVal = nums[r] ** 2;
+
+    if (leftVal < rightVal) {
+      res[rIdx] = rightVal;
+      r--;
+    } else {
+      res[rIdx] = leftVal;
+      l++;
+    }
+    rIdx--;
+  }
+  return res;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const maxSubArray = function (nums) {
+  let curMax = nums[0];
+  let maxima = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    curMax = Math.max(nums[i], curMax + nums[i]);
+    maxima = Math.max(maxima, curMax);
+  }
+  return maxima;
+};
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
+
+const insert = function (intervals, newInterval) {
+  let [start, end] = newInterval;
+  let left = [];
+  let right = [];
+
+  for (const interval of intervals) {
+    const [first, last] = interval;
+
+    // current interval is smaller than newInterval
+    if (last < start) left.push(interval);
+    // current interval is larger than newInterval
+    else if (first > end) right.push(interval);
+    // there is a overlap
+    else {
+      start = Math.min(start, first);
+      end = Math.max(end, last);
+    }
+  }
+
+  return [...left, [start, end], ...right];
+};
+// Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+
+//////////////////////////////////////////////////
+// --------------- Next problem --------------- //
+//////////////////////////////////////////////////
